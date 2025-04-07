@@ -13,7 +13,6 @@ let currentSymbols = ['', '', '', ''];
 let canLockSlots = false;
 let isSecondSpin = false;
 
- DOM-elementit
 const moneyDisplay = document.getElementById('money');
 const betInput = document.getElementById('bet');
 const playButton = document.getElementById('playButton');
