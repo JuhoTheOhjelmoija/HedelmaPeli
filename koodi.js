@@ -122,7 +122,6 @@ function playRound() {
     updateMoneyDisplay();
 }
 
- Tapahtumankuuntelijat
 playButton.addEventListener('click', playRound);
 
 slots.forEach((slot, index) => {
@@ -133,5 +132,4 @@ slots.forEach((slot, index) => {
     });
 });
 
- Alustus
 updateMoneyDisplay();
