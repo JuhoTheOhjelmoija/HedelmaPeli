@@ -1,10 +1,17 @@
-const symbols = ['🍎', '🍐', '🍒', '🍉', '7️⃣'];
+const symbols = [
+    { symbol: 'omena', image: 'omena.png' },
+    { symbol: 'päärynä', image: 'päärynä.png' },
+    { symbol: 'kirsikka', image: 'kirsikka.png' },
+    { symbol: 'meloni', image: 'meloni.png' },
+    { symbol: 'seiska', image: '7.png' }
+];
+
 const wins = {
-    '7️⃣7️⃣7️⃣7️⃣': 10,  
-    '🍎🍎🍎🍎': 6,   
-    '🍉🍉🍉🍉': 5,     //.png tiedot näkyy oudosti joten käytän emojeita korvauksena
-    '🍐🍐🍐🍐': 4,   
-    '🍒🍒🍒🍒': 3,     
+    'seiskaseiskaseiskaseiska': 10,
+    'omenaomenaomenaomena': 6,
+    'melonimelonimelonimeloni': 5,
+    'päärynäpäärynäpäärynäpäärynä': 4,
+    'kirsikkakirsikkakirsikkakirsikka': 3
 };
 
 let money = 50;
@@ -31,12 +38,13 @@ function checkWin(bet) {
     for (const [pattern, multiplier] of Object.entries(wins)) {
         if (symbolsString === pattern) {
             winAmount = bet * multiplier;
-            winDescription = `Neljä ${pattern[0]} symbolia!`;
+            const symbolName = pattern.substring(0, pattern.length/4);
+            winDescription = `Neljä ${symbolName} symbolia!`;
             return { amount: winAmount, description: winDescription };
         }
     }
     
-    const sevenCount = currentSymbols.filter(s => s === '7️⃣').length;
+    const sevenCount = currentSymbols.filter(s => s === 'seiska').length;
     if (sevenCount >= 3) {
         winAmount = bet * 5;
         winDescription = 'Kolme seiskaa!';
@@ -53,9 +61,10 @@ function getRandomSymbol() {
 function updateSlots() {
     slots.forEach((slot, index) => {
         if (!lockedSlots.has(index)) {
-            currentSymbols[index] = getRandomSymbol();
+            const symbol = getRandomSymbol();
+            currentSymbols[index] = symbol.symbol;
+            slot.innerHTML = `<img src="${symbol.image}" alt="${symbol.symbol}">`;
         }
-        slot.textContent = currentSymbols[index];
     });
 }
 
